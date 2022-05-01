@@ -11,17 +11,17 @@
 
 <body>
 <div style="margin: 10px">
-<form action = "/setcookie" method = "POST">
+<form method = "POST">
   <!-- Username input -->
   <div class="form-outline mb-4">
-    <input name="usernmae" type="text" id="form2Elogin1" class="form-control" />
-    <label class="form-label" for="form2login1">Username</label>
+    <input name="username" type="text" id="form2Elogin1" class="form-control" />
+    <label class="form-label" for="form2Elogin1">Username</label>
   </div>
 
   <!-- Password input -->
   <div class="form-outline mb-4">
     <input name="password" type="password" id="form2login2" class="form-control" />
-    <label class="form-label" for="form2Elogin2">Password</label>
+    <label class="form-label" for="form2login2">Password</label>
   </div>
 
   <!-- 2 column grid layout for inline styling -->
@@ -33,7 +33,7 @@
     </div>
 
 
-  <button style="margin: 10px" type="button" class="btn btn-primary btn-block mb-4">Sign in</button>
+  <button style="margin: 10px" type="submit" class="btn btn-primary btn-block mb-4" >Sign in</button>
 
   <div style="margin: 10px" class="text-center">
     <p>Not a member? <a href="/register">Register</a></p>

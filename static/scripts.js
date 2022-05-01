@@ -2,9 +2,7 @@
 // let my_username = "TheMythh"
 // let login = my_username+":"+auth_key+"@"
 // let tournamentsUrl = login + "api.challonge.com/v1/tournaments.json"
-function deleteButton() {
-     $("#test").remove()
-    }
+
 function show(){
     $("#display").attr("background", "black").remove()
     $.getJSON('/get_tourn').done( function (tournament) {

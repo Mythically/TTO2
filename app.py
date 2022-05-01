@@ -1,13 +1,11 @@
-from flask import Flask, render_template, jsonify, request, json, redirect
+from flask import Flask, render_template, jsonify, request, json, redirect, session
 import challonge, pprint, siteDB
 
 my_user = "TheMythh"
 my_api_key = "KpgOkCV50nJ4nWrIPEwj5dwT71yRVvWcM7SueADm"
 challonge.set_credentials(my_user, my_api_key)
-
 app = Flask(__name__, static_folder='static', template_folder="templates")
-
-
+loggedIn = "False"
 @app.route("/matches")
 def get_matches():
     get_matches = challonge.matches.index(11108882)
@@ -29,37 +27,54 @@ def get_tourn():  # put application's code here
     # pprint.pprint(tourneys)
     return jsonify(tourneys)
 
+@app.route("/logout")
+def logout():
+    global loggedIn
+    loggedIn = "False"
 
-# @app.route("/setcookie", methods=['POST'])
-# def setcookie():
 
-
-@app.route("/login", methods=['POST'])
+@app.route("/login", methods=['GET', 'POST'])
 def loggedIn():
-    username = request.form.get('userame')
-    password = request.form.get('password')
-    print(username, password)
-    if siteDB.checkLogin(username, password):
-        return redirect('/')
+    global loggedIn
+    if loggedIn == "True":
+        return redirect("/")
+    print(request.form.get('username'), request.form.get('password'))
+    if request.form.get('username') and request.form.get('password'):
+        username = request.form.get('username')
+        password = request.form.get('password')
+        loggedIn = True
+        print(username, password)
+        if siteDB.checkLogin(username, password):
+            loggedIn = "True"
+            return redirect('/')
+        else:
+            return render_template("login.html")
     else:
         return render_template("login.html")
 
 
-@app.route("/register", methods=['GET, POST'])
+@app.route("/register", methods=['GET', 'POST'])
 def register():
-    username = request.form.get('userame')
+    global loggedIn
+    if loggedIn == "True":
+        loggedIn = "False"
+    username = request.form.get('username')
     password = request.form.get('password')
     print(username, password)
     if siteDB.insertLogin(username, password):
+        loggedIn = "True"
         return redirect('/')
     else:
         return render_template("login.html")
 
 
 @app.route('/')
-def return_index():
-    return render_template('index.html')
-
+def showIndex():
+    print("Logged in: ", loggedIn )
+    if loggedIn == "True":
+        return render_template('index.html')
+    else:
+        return redirect("/login")
 
 if __name__ == '__main__':
     app.run(debug=True)
