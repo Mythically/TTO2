@@ -30,7 +30,6 @@ function matches2(){
     $.getJSON("/matches").done(function (matches) {
         console.log(matches)
         for (let i = 0; i < matches.length; i++) {
-
             alert(matches[i]['id'])
             $("body").append(`<p>${matches[i]}</p>`)
         }
