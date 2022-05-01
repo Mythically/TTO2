@@ -34,3 +34,6 @@ def checkLogin(username, password):
             return False
     else:
         return False
+
+# print(checkIfRegistered("TheMythh"))
+print(checkLogin("TheMythh", "admin"))
