@@ -9,14 +9,11 @@ loggedIn = "False"
 
 
 
-@app.route("/brackets")
+@app.route("/brackets" )
 def drawBrackets():
     data = queryAPI.getMatches()
-    print(data)
 
     return render_template("brackets.jinja2", data=data)
-
-
 @app.route("/matches")
 def get_matches():
     get_matches = challonge.matches.index(11108882)
@@ -33,10 +30,18 @@ def get_participants():
 
 @app.route('/get_tourn')
 def get_tourn():  # put application's code here
-    tourneys = challonge.tournaments.index()
-    pprint.pprint(tourneys)
-    # pprint.pprint(tourneys)
-    return jsonify(tourneys)
+    info = []
+    tournaments = challonge.tournaments.index()
+    for tournament in tournaments:
+        print(tournament['id'])
+        info.append ({
+            'id': tournament['id'],
+            'name': tournament['name'],
+            'participants': tournament['participants_count'],
+            'description': tournament['description']
+        })
+    print(jsonify(info.json()))
+    return jsonify(info)
 
 
 @app.route("/logout")

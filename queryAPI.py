@@ -4,13 +4,8 @@ my_user = "TheMythh"
 my_api_key = "KpgOkCV50nJ4nWrIPEwj5dwT71yRVvWcM7SueADm"
 challonge.set_credentials(my_user, my_api_key)
 
+ids = []
 
-# ids = []
-#
-# def getTrounament():
-#     tournaments = challonge.tournaments.index()
-#     for tournament in tournaments:
-#
 
 def getTournaments():
     global ids

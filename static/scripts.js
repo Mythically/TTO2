@@ -34,24 +34,28 @@ function matches2(){
     })
 }
 
-// function displayTournaments() {
-//     $(".cards").remove()
-//     for( tournament in tournaments) {
-//     $("#display").append(`<div class="cards col-xl-3 col-lg-4 col-sm-6">
-//                             <div class="card">
-//                                 <div id="${tournament['id']}" class="card-body">
-//                                     <p>Name: ${tournament['name']}</p>
-//                                     <p>Participants: ${tournament['participants_count']}</p>
-//                                     <p>Description: ${tournament['description']} </p>
-//                                 </div>
-//                             </div>
-//                           </div>`)
-//     }
-// }
+function displayTournaments() {
+    $.getJSON('/get_tourn').done(function (tournaments) {
+    $(".cards").remove()
+    for(let tournament in tournaments) {
+        console.log(tournaments )
+        console.log(tournament['id'])
+    $(".brackets").append(`<div class="cards col-xl-3 col-lg-4 col-sm-6">
+                            <div class="card">
+                                <div id="${tournament['id']}" class="card-body">
+                                    <p>Name: ${tournament['name']}</p>
+                                    <p>Participants: ${tournament['participants_count']}</p>
+                                    <p>Description: ${tournament['description']} </p>
+                                </div>
+                            </div>
+                          </div>`)
+    }
+    })
+}
 
-function drawBrackets(){
+function a(){
+    // $.getJSON("/brackets").done(function (brackets) {
         var titles = ['round 1', 'round 2', 'round 3']
-        console.log(rounds, "js")
         $(".brackets").brackets({
             titles: titles,
             rounds: rounds,
