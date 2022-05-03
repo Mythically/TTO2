@@ -3,15 +3,20 @@ import challonge, pprint
 my_user = "TheMythh"
 my_api_key = "KpgOkCV50nJ4nWrIPEwj5dwT71yRVvWcM7SueADm"
 challonge.set_credentials(my_user, my_api_key)
+
+
 # ids = []
+#
+# def getTrounament():
+#     tournaments = challonge.tournaments.index()
+#     for tournament in tournaments:
+#
 
-
-def getIDS():
+def getTournaments():
     global ids
     tournaments = challonge.tournaments.index()
     ids = [eachID['id'] for eachID in tournaments]
-    # return ids
-    # print(ids)
+
 
 def getParticipants():
     participants = [challonge.participants.index(11108882)]
@@ -37,13 +42,13 @@ def getMatches():
         for seed in match:
             if rounds != seed['round'] - 1:
                 rounds_players.append([])
-                rounds = seed['round']-1
+                rounds = seed['round'] - 1
             for person in people:
                 if seed['player1_id'] == person['ID']:
                     name1 = person['name']
                 if seed['player2_id'] == person['ID']:
                     name2 = person['name']
-            rounds_players[seed['round']-1].append({
+            rounds_players[seed['round'] - 1].append({
                 "player1": {
                     'name': name1,
                     'ID': seed['player1_id']
@@ -63,8 +68,6 @@ def getMatches():
     # pprint.pprint(ids)
     # pprint.pprint(participants)
     # pprint.pprint(matches)
-
-
 
     # rounds_players.append([])
     # rounds_players.append([])

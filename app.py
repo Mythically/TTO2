@@ -8,10 +8,11 @@ app = Flask(__name__, static_folder='static', template_folder="templates")
 loggedIn = "False"
 
 
+
 @app.route("/brackets")
 def drawBrackets():
     data = queryAPI.getMatches()
-    print(queryAPI.getMatches())
+    print(data)
 
     return render_template("brackets.jinja2", data=data)
 
