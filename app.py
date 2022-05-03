@@ -8,13 +8,14 @@ app = Flask(__name__, static_folder='static', template_folder="templates")
 loggedIn = "False"
 
 
-
 @app.route("/brackets")
 def drawBrackets():
     data = queryAPI.getMatches()
     print(queryAPI.getMatches())
 
     return render_template("brackets.jinja2", data=data)
+
+
 @app.route("/matches")
 def get_matches():
     get_matches = challonge.matches.index(11108882)

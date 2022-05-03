@@ -6,7 +6,7 @@ challonge.set_credentials(my_user, my_api_key)
 # ids = []
 
 
-def getTournaments():
+def getIDS():
     global ids
     tournaments = challonge.tournaments.index()
     ids = [eachID['id'] for eachID in tournaments]
