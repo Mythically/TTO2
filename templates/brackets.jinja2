@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+{% include "navbar.html" %}
 <body onload="return a()" >
+
 {#<button value="click me!"></button>#}
 <div class="brackets">
 </div>
@@ -12,12 +14,12 @@
 <script src="../static/jquery-3.6.0.js"></script>
 <script src="../static/brackets.js"></script>
 <script src="../static/scripts.js"></script>
+<script src="../static/brackets.min.js"></script>
 <script>
 
 
     var rounds = {{ data }}
-    console.log(rounds)
-    var titles = ['round 1', 'round 2', 'round 3']
+    var titles = {{ titles }}
 
 </script>
 </body>

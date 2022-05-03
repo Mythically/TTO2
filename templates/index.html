@@ -9,24 +9,21 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
+{% include "navbar.html" %}
 {#<input id="test" type="button" onclick="show()" value="click me!">#}
 {#<input type="button" onclick="participants()" value="participants">#}
 {#<input type="button" onclick="matches2()" value="matches">#}
-<div id="display" >
-    <button onclick="displayTournaments()"></button>
+<div id="display"  >
     <div class="container">
     <div class="row">
-        <div class="col">
-            <div class="brackets">
-            </div>
-        </div>
     </div>
 </div>
 </div>
+<script src="/static/jquery-3.6.0.js"></script>
+<script src="/static/brackets.min.js"></script>
+<script type="text/javascript" src="/static/scripts.js"></script>
 
-<script type="text/javascript" src="{{ url_for('static',filename='scripts.js') }}"></script>
-<script src="{{ url_for('static', filename='jquery-3.6.0.js') }}"></script>
-<script src="{{ url_for('static', filename='brackets.min.js') }}"></script>
+
 
 
 </body>

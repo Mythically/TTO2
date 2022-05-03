@@ -34,18 +34,21 @@ function matches2(){
     })
 }
 
+$("#row").ready(displayTournaments())
+
 function displayTournaments() {
     $.getJSON('/get_tourn').done(function (tournaments) {
     $(".cards").remove()
-    for(let tournament in tournaments) {
-        console.log(tournaments )
-        console.log(tournament['id'])
-    $(".brackets").append(`<div class="cards col-xl-3 col-lg-4 col-sm-6">
+    for(let i = 0; i < tournaments.length; i++) {
+    $(".row").append(`<div class="cards col-xl-3 col-lg-4 col-sm-6">
                             <div class="card">
-                                <div id="${tournament['id']}" class="card-body">
-                                    <p>Name: ${tournament['name']}</p>
-                                    <p>Participants: ${tournament['participants_count']}</p>
-                                    <p>Description: ${tournament['description']} </p>
+                                <div id="${tournaments[i]['id']}" class="card-body">
+                                    <p>Name: ${tournaments[i]['name']}</p>
+                                    <p>Participants: ${tournaments[i]['participants']}</p>
+                                    <p>Description: ${tournaments[i]['description']} </p>
+                                    <form name="show" method="POST" action="/brackets">
+                                    <button name="show" type="submit" value="${tournaments[i]['id']}" class="btn btn-primary">Show brackets</button>
+                                    </form>
                                 </div>
                             </div>
                           </div>`)
@@ -55,7 +58,8 @@ function displayTournaments() {
 
 function a(){
     // $.getJSON("/brackets").done(function (brackets) {
-        var titles = ['round 1', 'round 2', 'round 3']
+console.log(titles)
+    console.log(rounds)
         $(".brackets").brackets({
             titles: titles,
             rounds: rounds,

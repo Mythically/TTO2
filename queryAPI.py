@@ -5,7 +5,8 @@ my_api_key = "KpgOkCV50nJ4nWrIPEwj5dwT71yRVvWcM7SueADm"
 challonge.set_credentials(my_user, my_api_key)
 
 ids = []
-
+rounds_players = []
+titles = []
 
 def getTournaments():
     global ids
@@ -13,8 +14,8 @@ def getTournaments():
     ids = [eachID['id'] for eachID in tournaments]
 
 
-def getParticipants():
-    participants = [challonge.participants.index(11108882)]
+def getParticipants(idt):
+    participants = [challonge.participants.index(idt)]
     people = []
     x = ""
     for person in participants:
@@ -28,14 +29,25 @@ def getParticipants():
     return people
 
 
-def getMatches():
+def getRounds():
+    global titles
+    titles = []
+    i = 0
+    for round in rounds_players:
+        titles.append(f"Round {i}")
+        i+=1
+
+
+def getMatches(idt):
+    global rounds_players
     rounds_players = []
     rounds = -1
-    people = getParticipants()
-    matches = [challonge.matches.index(11108882)]
+    people = getParticipants(idt)
+    matches = [challonge.matches.index(idt)]
     for match in matches:
         for seed in match:
             if rounds != seed['round'] - 1:
+                print(rounds, seed['round']-1)
                 rounds_players.append([])
                 rounds = seed['round'] - 1
             for person in people:
@@ -53,21 +65,9 @@ def getMatches():
                     'ID': seed['player2_id'],
                 }
             })
+    getRounds()
+    pprint.pprint(rounds_players)
     return rounds_players
-    # pprint.pprint(rounds_players)
-    # for round in rounds_players[0]:
-    #     pprint.pprint(round)
-    #     for players in round:
-    #         print(players)
 
-    # pprint.pprint(ids)
-    # pprint.pprint(participants)
-    # pprint.pprint(matches)
 
-    # rounds_players.append([])
-    # rounds_players.append([])
-    # rounds_players.append([])
-    # rounds_players[rounds].append("cccccccccc")
-    # rounds_players[1].append("aaaaa")
-    # rounds_players[2].append("bbbbbbbb")
-    # pprint.pprint(rounds_players)
+# getMatches(11119218)

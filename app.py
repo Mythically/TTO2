@@ -8,12 +8,15 @@ app = Flask(__name__, static_folder='static', template_folder="templates")
 loggedIn = "False"
 
 
-
-@app.route("/brackets" )
+@app.route("/brackets", methods=['POST'])
 def drawBrackets():
-    data = queryAPI.getMatches()
+    titles = queryAPI.titles
+    idt = request.form.get('show')
+    data = queryAPI.getMatches(idt)
 
-    return render_template("brackets.jinja2", data=data)
+    return render_template("brackets.jinja2", data=data, titles=titles)
+
+
 @app.route("/matches")
 def get_matches():
     get_matches = challonge.matches.index(11108882)
@@ -32,15 +35,17 @@ def get_participants():
 def get_tourn():  # put application's code here
     info = []
     tournaments = challonge.tournaments.index()
+
     for tournament in tournaments:
-        print(tournament['id'])
-        info.append ({
+        # print(tournament['id'])
+        info.append({
             'id': tournament['id'],
             'name': tournament['name'],
             'participants': tournament['participants_count'],
             'description': tournament['description']
         })
-    print(jsonify(info.json()))
+    # print(info)
+    # print(jsonify(info))
     return jsonify(info)
 
 

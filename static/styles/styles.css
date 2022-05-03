@@ -2,3 +2,16 @@
   margin: 0;
   box-sizing: border-box;
 }
+.cards {
+  margin-top: 10px;
+
+}
+.card:hover {
+    transform: scale(1.05);
+    Animation: flicker 1.5s infinite alternate;
+    z-index: 100;
+    position: relative;
+    margin-bottom: 30px;
+    margin-top: 10px;
+
+}
