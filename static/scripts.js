@@ -33,3 +33,22 @@ function matches2(){
         }
     })
 }
+
+function drawBrackets(){
+        var titles = ['round 1', 'round 2', 'round 3']
+        $(".brackets").brackets({
+            titles: titles,
+            rounds: rounds,
+            color_title: 'black',
+            border_color: '#00F',
+            color_player: 'black',
+            bg_player: 'white',
+            color_player_hover: 'white',
+            bg_player_hover: 'blue',
+            border_radius_player: '10px',
+            border_radius_lines: '10px',
+        });
+        (jQuery);
+
+    // })
+}

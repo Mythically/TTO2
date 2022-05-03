@@ -1,5 +1,5 @@
 from flask import Flask, render_template, jsonify, request, json, redirect, session
-import challonge, pprint, siteDB
+import challonge, pprint, siteDB, queryAPI
 
 my_user = "TheMythh"
 my_api_key = "KpgOkCV50nJ4nWrIPEwj5dwT71yRVvWcM7SueADm"
@@ -9,6 +9,12 @@ loggedIn = "False"
 
 
 
+@app.route("/brackets")
+def drawBrackets():
+    data = queryAPI.getMatches()
+    print(queryAPI.getMatches())
+
+    return render_template("brackets.jinja2", data=data)
 @app.route("/matches")
 def get_matches():
     get_matches = challonge.matches.index(11108882)
