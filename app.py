@@ -8,12 +8,16 @@ app = Flask(__name__, static_folder='static', template_folder="templates")
 loggedIn = "False"
 
 
+@app.route("/create")
+def create_trounament():
+    return render_template("create.html")
+
+
 @app.route("/brackets", methods=['POST'])
 def drawBrackets():
-    titles = queryAPI.titles
     idt = request.form.get('show')
     data = queryAPI.getMatches(idt)
-
+    titles = queryAPI.titles
     return render_template("brackets.jinja2", data=data, titles=titles)
 
 
@@ -53,6 +57,7 @@ def get_tourn():  # put application's code here
 def logout():
     global loggedIn
     loggedIn = "False"
+    return redirect("/login")
 
 
 @app.route("/login", methods=['GET', 'POST'])
@@ -75,19 +80,20 @@ def loggedIn():
         return render_template("login.html")
 
 
-@app.route("/register", methods=['GET', 'POST'])
+@app.route("/register", methods=['POST'])
 def register():
     global loggedIn
-    if loggedIn == "True":
-        loggedIn = "False"
-    username = request.form.get('username')
-    password = request.form.get('password')
-    # print(username, password)
-    if siteDB.insertLogin(username, password):
-        loggedIn = "True"
-        return redirect('/')
-    else:
-        return render_template("login.html")
+    if request.method == "POST":
+        if loggedIn == "True":
+            loggedIn = "False"
+        username = request.form.get('username')
+        password = request.form.get('password')
+        # print(username, password)
+        if siteDB.insertLogin(username, password):
+            loggedIn = "True"
+            return redirect('/')
+        else:
+            return render_template("register.html")
 
 
 @app.route('/')
@@ -100,4 +106,4 @@ def showIndex():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=80, debug=True)

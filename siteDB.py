@@ -5,7 +5,6 @@ myclient = MongoClient("mongodb://localhost:27017/")
 siteDB = myclient["siteDatabase"]
 logins = siteDB['logins']
 
-
 def checkIfRegistered(username):
     try:
         login_name = logins.find({'username': f'{username}'})

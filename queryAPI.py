@@ -8,6 +8,7 @@ ids = []
 rounds_players = []
 titles = []
 
+
 def getTournaments():
     global ids
     tournaments = challonge.tournaments.index()
@@ -34,8 +35,8 @@ def getRounds():
     titles = []
     i = 0
     for round in rounds_players:
+        i += 1
         titles.append(f"Round {i}")
-        i+=1
 
 
 def getMatches(idt):
@@ -47,7 +48,7 @@ def getMatches(idt):
     for match in matches:
         for seed in match:
             if rounds != seed['round'] - 1:
-                print(rounds, seed['round']-1)
+                print(rounds, seed['round'] - 1)
                 rounds_players.append([])
                 rounds = seed['round'] - 1
             for person in people:
@@ -68,6 +69,5 @@ def getMatches(idt):
     getRounds()
     pprint.pprint(rounds_players)
     return rounds_players
-
 
 # getMatches(11119218)
