@@ -1,7 +1,7 @@
 import challonge, pprint
 
-my_user = "TheMythh"
-my_api_key = "KpgOkCV50nJ4nWrIPEwj5dwT71yRVvWcM7SueADm"
+my_user = ""
+my_api_key = ""
 challonge.set_credentials(my_user, my_api_key)
 
 ids = []

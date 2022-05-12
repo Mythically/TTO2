@@ -1,7 +1,3 @@
-// let auth_key = "KpgOkCV50nJ4nWrIPEwj5dwT71yRVvWcM7SueADm"
-// let my_username = "TheMythh"
-// let login = my_username+":"+auth_key+"@"
-// let tournamentsUrl = login + "api.challonge.com/v1/tournaments.json"
 
 function show(){
     $("#display").attr("background", "black").remove()
