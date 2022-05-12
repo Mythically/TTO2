@@ -5,6 +5,37 @@ myclient = MongoClient("mongodb://localhost:27017/")
 siteDB = myclient["siteDatabase"]
 logins = siteDB['logins']
 
+
+def logout(username):
+    u = {'username': f'{username}'}
+    sets = {"$set": {"loggedin": "False"}}
+    logins.update_one(u, sets)
+
+
+def login(username, password):
+    if checkLogin(username, password):
+        u = {'username': f'{username}'}
+        sets = {"$set": {"loggedin": "True"}}
+        logins.update_one(u, sets)
+    else:
+        return False
+
+
+def checkIfLoggedIn(username):
+    print("checking")
+    try:
+        login_name = logins.find({'username': f'{username}'})
+        if login_name[0]['loggedin'] == True:
+            print("true")
+            return True
+        else:
+            print("false")
+            return False
+    except TypeError as e:
+        print(e)
+        return "An error has occured, please try again!"
+
+
 def checkIfRegistered(username):
     try:
         login_name = logins.find({'username': f'{username}'})
@@ -42,3 +73,4 @@ def checkLogin(username, password):
     else:
         print("DB: Not registered")
         return False
+

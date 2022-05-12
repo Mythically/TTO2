@@ -58,8 +58,7 @@ function displayTournaments() {
 
 function a(){
     // $.getJSON("/brackets").done(function (brackets) {
-console.log(titles)
-    console.log(rounds)
+
         $(".brackets").brackets({
             titles: titles,
             rounds: rounds,
